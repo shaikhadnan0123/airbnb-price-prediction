@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(
 MODEL_PATH = os.path.join(
     BASE_DIR,
     "models",
-    "extra_trees_model.joblib"
+    "extra_trees_model_compressed.joblib"
 )
 
 
@@ -160,8 +160,4 @@ def predict():
 # -----------------------------
 
 if __name__ == "__main__":
-
-    app.run(
-        debug=True,
-        port=5000
-    )
+    app.run(host="0.0.0.0", port=5000, debug=False)

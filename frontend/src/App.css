@@ -111,6 +111,7 @@
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   transition: all 0.25s ease;
   box-shadow: var(--shadow-sm);
@@ -131,12 +132,16 @@
   letter-spacing: -1px;
   background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
   -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   -webkit-text-fill-color: transparent;
 }
 
 .theme-light .hero-title {
   background: linear-gradient(180deg, #0F172A 0%, #334155 100%);
   -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   -webkit-text-fill-color: transparent;
 }
 
@@ -246,6 +251,7 @@
   padding: 12px 14px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border-radius: 14px;
   cursor: pointer;
@@ -305,6 +311,7 @@
 .form-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 28px;
@@ -597,6 +604,7 @@
   width: 100%;
   height: 6px;
   -webkit-appearance: none;
+  appearance: none;
   background: #CBD5E1;
   border-radius: 4px;
   outline: none;
@@ -734,6 +742,7 @@
 .result-card {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, var(--bg-card) 100%);
   border: 1.5px solid rgba(16, 185, 129, 0.35);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 32px;
@@ -821,6 +830,7 @@
   letter-spacing: -1.5px;
   background: linear-gradient(180deg, var(--text-main) 0%, #10B981 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1;
 }

@@ -1,7 +1,7 @@
+Flask
+flask-cors
+joblib
 pandas
 numpy
-matplotlib
-seaborn
 scikit-learn
-sweetviz
-jupyter
+gunicorn

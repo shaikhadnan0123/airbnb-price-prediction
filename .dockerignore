@@ -1,0 +1,93 @@
+# ==============================
+# Python virtual environments
+# ==============================
+.venv/
+venv/
+env/
+
+# ==============================
+# Python cache / temporary files
+# ==============================
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# ==============================
+# Git
+# ==============================
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# ==============================
+# Frontend dependencies/build
+# ==============================
+frontend/node_modules/
+frontend/.next/
+frontend/dist/
+frontend/build/
+
+# ==============================
+# Dataset files
+# Not required by Flask API
+# ==============================
+data/
+*.csv
+*.xlsx
+*.xls
+*.zip
+
+# ==============================
+# Other trained models
+# Keep ONLY the compressed Extra Trees model
+# ==============================
+models/extra_trees_model.joblib
+models/linear_regression_model.joblib
+models/random_forest_model.joblib
+models/hist_gradient_boosting_model.joblib
+models/model_metrics.json
+
+# ==============================
+# Jupyter
+# ==============================
+.ipynb_checkpoints/
+*.ipynb
+
+# ==============================
+# IDE / editor
+# ==============================
+.vscode/
+.idea/
+
+# ==============================
+# EDA / generated reports
+# ==============================
+*.html
+*.pdf
+
+# ==============================
+# Logs
+# ==============================
+*.log
+
+# ==============================
+# OS files
+# ==============================
+.DS_Store
+Thumbs.db
+
+# ==============================
+# Environment / secrets
+# ==============================
+.env
+.env.*
+!.env.example
+
+# ==============================
+# Docker
+# ==============================
+Dockerfile
+.dockerignore
