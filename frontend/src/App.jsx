@@ -105,6 +105,16 @@ function App() {
   const [error, setError] = useState("");
   const [apiStatus, setApiStatus] = useState("checking"); // 'healthy' | 'offline' | 'checking'
   const [activePreset, setActivePreset] = useState("manhattan-luxury");
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
+
+  // Sync theme with localStorage
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
 
   // Check API health status on mount
   useEffect(() => {
@@ -217,7 +227,7 @@ function App() {
   const locationInteraction = (formData.latitude * formData.longitude).toFixed(2);
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell theme-${theme}`} data-theme={theme}>
       {/* Background Glow Overlay */}
       <div className="bg-glow bg-glow-1"></div>
       <div className="bg-glow bg-glow-2"></div>
@@ -226,12 +236,46 @@ function App() {
       <div className="main-wrapper">
         {/* Header */}
         <header className="app-header">
-          <div className="brand-badge">
-            <svg className="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-            <span>NYC Airbnb Intelligence</span>
+          <div className="header-top-row">
+            <div className="brand-badge">
+              <svg className="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>NYC Airbnb Intelligence</span>
+            </div>
+
+            {/* Theme Toggle Button */}
+            <button
+              type="button"
+              className="theme-toggle-btn"
+              onClick={toggleTheme}
+              title={`Switch to ${theme === "dark" ? "Light" : "Night"} Mode`}
+            >
+              {theme === "dark" ? (
+                <>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                  </svg>
+                  <span>Light Mode</span>
+                </>
+              ) : (
+                <>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                  <span>Night Mode</span>
+                </>
+              )}
+            </button>
           </div>
 
           <h1 className="hero-title">
@@ -712,8 +756,11 @@ function App() {
 
         {/* Footer */}
         <footer className="app-footer">
-          <p>
-            NYC Airbnb Price Prediction Model • Project Scoped to Listings ≤ $500/night
+          <p className="copyright-text">
+            © 2026 <strong>Shaikh Adnan</strong>. All rights reserved.
+          </p>
+          <p className="footer-sub">
+            NYC Airbnb Price Prediction Model • Extra Trees Regressor ($10 – $500/night scope)
           </p>
         </footer>
       </div>
