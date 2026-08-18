@@ -1,0 +1,9 @@
+{
+    "model": "ExtraTreesRegressor",
+    "total_listings": 47840,
+    "price_scope": "$10-$500",
+    "mae": 38.55,
+    "mse": 3798.05,
+    "rmse": 61.63,
+    "r2_score": 0.5083
+}
