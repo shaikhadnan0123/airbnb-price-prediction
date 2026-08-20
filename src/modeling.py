@@ -104,7 +104,9 @@ def prepare_data(df):
                 "model",
                 TransformedTargetRegressor(
                     regressor=ExtraTreesRegressor(
-                        n_estimators=200,
+                        n_estimators=50,
+                        max_depth=16,
+                        min_samples_leaf=3,
                         random_state=42,
                         n_jobs=-1
                     ),
@@ -462,9 +464,9 @@ if __name__ == "__main__":
     model_save_path = (
         r"C:\Users\adnan\OneDrive\Desktop"
         r"\Airbnb_price_predction\models"
-        r"\extra_trees_model.joblib"
+        r"\extra_trees_model_compressed.joblib"
     )
-
+    
     metrics_file_path = (
         r"C:\Users\adnan\OneDrive\Desktop"
         r"\Airbnb_price_predction\models"
@@ -664,23 +666,18 @@ if __name__ == "__main__":
         "\nSaving the trained model..."
     )
 
-    save_model(
-        model,
-        model_save_path
-    )
-
-    # -----------------------------
-    # SAVE METRICS
-    # -----------------------------
+    save_model(model, model_save_path)
 
     print(
-        "\nSaving model metrics..."
+        f"\nCompressed model saved successfully to:\n"
+        f"{model_save_path}"
     )
 
-    save_metrics(
-        metrics,
-        len(df),
-        metrics_file_path
+    # Display model file size
+    model_size_mb = os.path.getsize(model_save_path) / (1024 * 1024)
+
+    print(
+        f"Model size: {model_size_mb:.2f} MB"
     )
 
     # -----------------------------
