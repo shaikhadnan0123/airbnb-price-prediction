@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
+const API_BASE_URL = "https://airbnb-price-prediction-lcnt.onrender.com";
+
 // Quick Preset Scenarios for realistic testing
 const PRESETS = [
   {
@@ -117,23 +119,25 @@ function App() {
   };
 
   // Check API health status on mount
-  useEffect(() => {
-    checkApiHealth();
-  }, []);
+useEffect(() => {
+  checkApiHealth();
+}, []);
 
-  const checkApiHealth = async () => {
-    setApiStatus("checking");
-    try {
-      const res = await fetch("http://127.0.0.1:5000/");
-      if (res.ok) {
-        setApiStatus("healthy");
-      } else {
-        setApiStatus("offline");
-      }
-    } catch {
+const checkApiHealth = async () => {
+  setApiStatus("checking");
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/`);
+
+    if (res.ok) {
+      setApiStatus("healthy");
+    } else {
       setApiStatus("offline");
     }
-  };
+  } catch (error) {
+    setApiStatus("offline");
+  }
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -182,16 +186,13 @@ function App() {
     setPredictedPrice(null);
 
     try {
-  const response = await fetch(
-    "https://airbnb-price-prediction-lcnt.onrender.com/predict",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    }
-  );
+      const response = await fetch(`${API_BASE_URL}/predict`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const result = await response.json();
 
@@ -210,9 +211,11 @@ function App() {
         }
       }, 100);
     } catch (err) {
+      setApiStatus("offline");
+
       setError(
         err.message.includes("Failed to fetch")
-          ? "Unable to connect to Flask API backend (http://127.0.0.1:5000). Please ensure your Flask server is running!"
+          ? "Unable to connect to the deployed prediction API. The Render service may be starting up or temporarily unavailable. Please try again in a few moments."
           : err.message
       );
     } finally {
@@ -293,7 +296,7 @@ function App() {
             <div className={`status-pill ${apiStatus}`}>
               <span className="status-dot"></span>
               {apiStatus === "healthy" && "Flask API Online (Extra Trees Active)"}
-              {apiStatus === "offline" && "Flask API Offline (127.0.0.1:5000)"}
+              {apiStatus === "offline" && "Prediction API Offline"}
               {apiStatus === "checking" && "Connecting to API..."}
             </div>
 

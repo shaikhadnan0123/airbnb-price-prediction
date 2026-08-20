@@ -123,8 +123,9 @@ def predict():
 
 # Run the API server only when this file is executed directly
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
     app.run(
         host="0.0.0.0",
-        port=5000,
+        port=port,
         debug=False
-    )
+    )
