@@ -2,6 +2,9 @@
 *.joblib
 models/*.joblib
 
+# Allow the compressed deployment model
+!models/extra_trees_model_compressed.joblib
+
 # Python
 __pycache__/
 *.py[cod]
